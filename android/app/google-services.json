@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757122898099",
+    "project_id": "homekart-b48c8",
+    "storage_bucket": "homekart-b48c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757122898099:android:abd6d51586976f44b238c6",
+        "android_client_info": {
+          "package_name": "com.homekart.homekart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkdYtTrcHt0cvS45LyOzRMEdcUnbQtVJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
