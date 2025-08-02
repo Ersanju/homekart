@@ -1,4 +1,4 @@
-package com.example.homekart
+package com.homekart.homekart
 
 import io.flutter.embedding.android.FlutterActivity
 
