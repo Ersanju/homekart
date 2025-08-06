@@ -29,6 +29,9 @@ dependencies:
   animated_text_kit: ^4.2.3
   firebase_app_check: ^0.4.0
   shared_preferences: ^2.5.3
+  intl: ^0.20.2
+  string_similarity: ^2.1.1
+  sms_autofill: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +44,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/app_assets/app_logo.png
+    - assets/app_assets/
 
 flutter_launcher_icons:
   android: true
