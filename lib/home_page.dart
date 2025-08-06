@@ -10,8 +10,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:homekart/pages/account/edit_profile_page.dart';
+import 'package:homekart/pages/authentication/login_page.dart';
 import 'package:homekart/pages/home/chocolate_product_detail_page.dart';
 import 'package:homekart/pages/home/product_detail_page.dart';
+import 'package:homekart/pages/home/products_by_category_grid_page.dart';
+import 'package:homekart/pages/home/search_results_page.dart';
 import 'package:homekart/utils/app_auth_provider.dart';
 import 'package:homekart/utils/app_util.dart';
 import 'package:homekart/utils/wishlist_provider.dart';
@@ -480,12 +484,24 @@ class _HomePageState extends State<HomePage> {
       actions: [
         if (!isLoggedIn)
           TextButton(
-            onPressed: () => Navigator.pushNamed(context, '/login'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
             child: const Text("Login / Signup"),
           )
         else
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/edit_profile'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EditProfilePage(),
+                ),
+              );
+            },
             child: Row(
               children: [
                 Padding(
@@ -574,16 +590,19 @@ class _HomePageState extends State<HomePage> {
       );
       return;
     }
-    Navigator.pushNamed(context, '/search_results', arguments: query);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SearchResultsPage(query: query)),
+    );
   }
 
   Widget buildSearchBar(BuildContext context, TextEditingController controller, VoidCallback onSearch) {
     const hints = [
-      "Search for cakes...",
-      "Search for gifts...",
-      "Search for flowers...",
-      "Search for toys...",
-      "Search for celebration items...",
+      "   Search for cakes...",
+      "   Search for gifts...",
+      "   Search for flowers...",
+      "   Search for toys...",
+      "   Search for celebration items...",
     ];
 
     return Padding(
@@ -694,7 +713,18 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCategoryItem(ProductCategory category) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/products_by_category', arguments: category.id),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (_) => ProductsByCategoryGridPage(
+              categoryId: category.id,
+              categoryName: category.name,
+            ),
+          ),
+        );
+      },
       child: Column(
         children: [
           Hero(

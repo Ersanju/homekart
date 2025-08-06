@@ -712,6 +712,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.2"
   json_annotation:
     dependency: transitive
     description:
@@ -936,6 +944,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  pin_input_text_field:
+    dependency: transitive
+    description:
+      name: pin_input_text_field
+      sha256: f45683032283d30b670ec343781660655e3e1953438b281a0bc6e2d358486236
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.2"
   platform:
     dependency: transitive
     description:
@@ -1045,6 +1061,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  sms_autofill:
+    dependency: "direct main"
+    description:
+      name: sms_autofill
+      sha256: c65836abe9c1f62ce411bb78d5546a09ece4297558070b1bd871db1db283aaf9
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   source_span:
     dependency: transitive
     description:
@@ -1133,6 +1157,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  string_similarity:
+    dependency: "direct main"
+    description:
+      name: string_similarity
+      sha256: b4b73ec3af3e4203504b136dfbcdbca29edea4eb373684811b76ded9f40a54b9
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   synchronized:
     dependency: transitive
     description:
