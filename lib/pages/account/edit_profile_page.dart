@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/app_auth_provider.dart';
 import '../../utils/app_util.dart';
-import '../authentication/app_auth_provider.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -40,23 +40,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Future<void> _loadUserData() async {
     final userId = context.read<AppAuthProvider>().userId;
-    final doc =
-        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+    final doc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
     if (doc.exists) {
       final data = doc.data()!;
       setState(() {
         _nameController.text = data['name'] ?? '';
-        _emailController.text = data['email'] ?? '';
+
+        // ✅ Only assign if it's a valid email
+        final emailValue = (data['email'] ?? '').toString().trim();
+        final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+        if (emailRegex.hasMatch(emailValue)) {
+          _emailController.text = emailValue;
+        } else {
+          _emailController.clear();
+        }
+
         final fullPhone = data['phone'] ?? '';
         _phoneController.text = fullPhone.replaceFirst(RegExp(r'^\+91'), '');
+
         _gender = data['gender'] ?? 'Male';
         _profileImageUrl = data['profileImageUrl'];
         _dob = data['dob'] != null ? DateTime.tryParse(data['dob']) : null;
-        _anniversary =
-            data['anniversary'] != null
-                ? DateTime.tryParse(data['anniversary'])
-                : null;
+        _anniversary = data['anniversary'] != null
+            ? DateTime.tryParse(data['anniversary'])
+            : null;
       });
     }
   }
@@ -128,6 +136,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     required String label,
     required DateTime? date,
     required VoidCallback onTap,
+    bool isRequired = false,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -142,10 +151,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
           controller: TextEditingController(
             text: date == null ? '' : DateFormat('dd/MM/yyyy').format(date),
           ),
+          validator: (val) {
+            if (isRequired && date == null) {
+              return 'Please select $label';
+            }
+            return null;
+          },
         ),
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -273,13 +289,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
               // Email
               TextFormField(
                 controller: _emailController,
-                readOnly: true,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'Email (optional)',
                   prefixIcon: const Icon(Icons.email),
                   border: _border,
                 ),
+                validator: (val) {
+                  if (val != null && val.trim().isNotEmpty) {
+                    // Optional but must be valid if entered
+                    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    if (!emailRegex.hasMatch(val.trim())) {
+                      return 'Enter a valid email';
+                    }
+                  }
+                  return null;
+                },
               ),
+
               const SizedBox(height: 16),
 
               // Phone
@@ -323,6 +350,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 label: 'Date of Birth',
                 date: _dob,
                 onTap: () => _pickDate(isDOB: true),
+                isRequired: true
               ),
               const SizedBox(height: 16),
 
