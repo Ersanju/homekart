@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:homekart/pages/account/account_page.dart';
 import 'package:homekart/pages/account/edit_profile_page.dart';
 import 'package:homekart/pages/authentication/login_page.dart';
 import 'package:homekart/pages/home/chocolate_product_detail_page.dart';
@@ -579,7 +580,7 @@ class _HomePageState extends State<HomePage> {
     buildHomeContent(),
     const Text("CategoryPage"),
     const Text("CartPage"),
-    const Text("AccountPage"),
+    AccountPage()
   ];
 
   void _handleSearch(BuildContext context) {
