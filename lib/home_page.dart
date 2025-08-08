@@ -13,6 +13,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:homekart/pages/account/account_page.dart';
 import 'package:homekart/pages/account/edit_profile_page.dart';
 import 'package:homekart/pages/authentication/login_page.dart';
+import 'package:homekart/pages/cart/cart_page.dart';
+import 'package:homekart/pages/category/category_page.dart';
 import 'package:homekart/pages/home/chocolate_product_detail_page.dart';
 import 'package:homekart/pages/home/product_detail_page.dart';
 import 'package:homekart/pages/home/products_by_category_grid_page.dart';
@@ -578,8 +580,8 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> get _pages => [
     buildHomeContent(),
-    const Text("CategoryPage"),
-    const Text("CartPage"),
+    CategoryPage(),
+    CartPage(),
     AccountPage()
   ];
 
