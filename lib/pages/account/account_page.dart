@@ -23,6 +23,7 @@ import 'chat_with_us.dart';
 import 'decor_info_page.dart';
 import 'edit_profile_page.dart';
 import 'fyq_page.dart';
+import 'my_order_page.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -211,8 +212,17 @@ class _AccountPageState extends State<AccountPage> {
           _AccountButton(
             icon: Icons.local_shipping_outlined,
             label: "My Orders",
-            onPressed: () {},
+            onPressed: () async {
+              final isLoggedIn = await AppUtil.ensureLoggedInGlobal(context);
+              if (!isLoggedIn) return;
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => MyOrdersPage(userId: FirebaseAuth.instance.currentUser!.uid,)),
+              );
+            },
           ),
+
           _AccountButton(
             icon: Icons.notifications_outlined,
             label: "Reminders",

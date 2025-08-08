@@ -12,6 +12,7 @@ import '../../utils/location_provider.dart';
 import '../../utils/wishlist_provider.dart';
 import '../../widgets/cake_product_card.dart';
 import '../../widgets/delivery_location_section.dart';
+import '../cart/cart_page.dart';
 import 'chocolate_product_detail_page.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -582,7 +583,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const Text("testdata")),
+              MaterialPageRoute(builder: (_) => const CartPage()),
             );
           } else {
             cartProvider.addItem(
